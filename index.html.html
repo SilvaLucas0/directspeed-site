@@ -41,8 +41,9 @@ body{
 }
 
 /* ── CURSOR ── */
-#cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .15s;}
-#cur-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(0,229,255,.3);border-radius:50%;pointer-events:none;z-index:9998;transition:width .2s,height .2s;}
+#cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .15s,opacity .3s;}
+#cur-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(0,229,255,.3);border-radius:50%;pointer-events:none;z-index:9998;transition:width .2s,height .2s,opacity .3s;}
+@media(pointer:coarse){#cur,#cur-ring{opacity:0;}}
 
 /* ── NAV ── */
 nav{
@@ -372,6 +373,201 @@ footer{background:var(--bg);padding:48px;border-top:1px solid var(--border);disp
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease;}
 .reveal.visible{opacity:1;transform:none;}
+
+/* ══════════════════════════════
+   ANÚNCIO DIRECTSPEED (seção #demo)
+   ══════════════════════════════ */
+
+/* ── DEMO / ANÚNCIO EM VÍDEO ── */
+#demo{background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(0,229,255,.05),transparent 70%),var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+#demo .container{max-width:1180px;}
+.ad-frame{margin-top:56px;border-radius:20px;overflow:hidden;position:relative;background:#07090f;border:1px solid rgba(0,229,255,.2);box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 70px rgba(0,229,255,.07);}
+.ad-frame::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(0,229,255,.4),transparent 30%,transparent 70%,rgba(124,58,237,.4));-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:60;}
+.demo-live{position:absolute;top:14px;left:16px;z-index:55;display:inline-flex;align-items:center;gap:7px;background:rgba(4,6,13,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,23,68,.4);color:#ff5f7a;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;padding:5px 12px;border-radius:100px;}
+.demo-live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:hpulse 1.4s ease infinite;}
+.demo-cta-row{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:32px;}
+.demo-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);text-align:center;}
+.demo-fs{position:absolute;bottom:12px;right:14px;z-index:65;display:inline-flex;align-items:center;gap:6px;background:rgba(4,6,13,.7);backdrop-filter:blur(8px);border:1px solid rgba(0,229,255,.3);color:var(--accent);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.8px;padding:7px 14px;border-radius:100px;cursor:pointer;transition:all .2s;}
+.demo-fs:hover{background:rgba(0,229,255,.12);border-color:rgba(0,229,255,.6);}
+.ad-frame:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;border-radius:0;border:none;}
+.ad-frame:-webkit-full-screen{display:flex;align-items:center;justify-content:center;background:#000;border-radius:0;border:none;}
+@media(max-width:640px){
+  #demo{padding-left:10px;padding-right:10px;}
+  .ad-frame{margin-top:36px;border-radius:12px;}
+  .demo-live{top:8px;left:8px;font-size:9px;padding:4px 9px;}
+  .demo-fs{bottom:8px;right:8px;font-size:10px;padding:6px 11px;}
+  .demo-cta-row{margin-top:24px;gap:14px;}
+}
+
+  
+  
+  
+  #adWrap { position:relative; overflow:hidden; margin:0 auto; }
+  #adStage {
+    width:1920px; height:1080px; position:absolute; top:0; left:0;
+    transform-origin:top left;
+    background:#07090f; overflow:hidden;
+    font-family:'Segoe UI',-apple-system,Arial,sans-serif;
+    text-align:left; line-height:normal;
+  }
+
+  /* ─── fundo com brilhos animados ─── */
+  .ad-blob { position:absolute; border-radius:50%; filter:blur(120px); opacity:.35; }
+  .ad-b1 { width:700px; height:700px; background:#00e5ff22; top:-200px; right:-100px; animation:adfloat1 9s ease-in-out infinite alternate; }
+  .ad-b2 { width:600px; height:600px; background:#7c3aed33; bottom:-250px; left:400px; animation:adfloat2 11s ease-in-out infinite alternate; }
+  .ad-b3 { width:400px; height:400px; background:#00e5ff18; bottom:100px; right:300px; animation:adfloat1 13s ease-in-out infinite alternate-reverse; }
+  @keyframes adfloat1 { to { transform:translate(-80px,60px) scale(1.15); } }
+  @keyframes adfloat2 { to { transform:translate(90px,-50px) scale(1.1); } }
+  .ad-gridbg { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:60px 60px; }
+
+  /* ─── headline ─── */
+  #headWrap { position:absolute; left:590px; top:70px; width:1260px; text-align:center; z-index:5; }
+  #adHead { font-size:62px; font-weight:800; color:#fff; line-height:1.15; letter-spacing:-1px; opacity:0; transform:translateY(18px); transition:all .55s cubic-bezier(.2,1,.3,1); }
+  #adHead.show { opacity:1; transform:none; }
+  #adHead .cy { color:#00e5ff; text-shadow:0 0 40px rgba(0,229,255,.45); }
+  #adSub { margin-top:14px; font-size:26px; color:#9aa7bd; font-weight:500; opacity:0; transition:opacity .6s .15s; }
+  #adSub.show { opacity:1; }
+
+  /* ─── painel DirectSpeed (réplica) ─── */
+  #panel {
+    position:absolute; left:48px; top:60px; width:492px; z-index:10;
+    background:#0d1117; border-radius:20px; overflow:hidden;
+    box-shadow:0 24px 80px rgba(0,0,0,.85), 0 0 0 1.5px rgba(0,229,255,.18), 0 0 90px rgba(0,229,255,.07);
+    font-size:15px; color:#e4e8f0;
+  }
+  .p-bar { background:linear-gradient(180deg,#0e141c,#0b1017); border-bottom:1px solid rgba(255,255,255,.07); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; }
+  .p-brand { display:flex; align-items:center; gap:10px; font-size:20px; font-weight:800; color:#fff; }
+  .p-brand span { color:#00e5ff; }
+  .p-pill { font-size:13px; font-family:Consolas,monospace; padding:4px 14px; border-radius:20px; background:#131920; border:1px solid rgba(0,200,83,.4); color:#00c853; }
+  .p-dots { display:flex; gap:8px; margin-left:12px; }
+  .p-dot { width:26px; height:26px; border-radius:50%; border:1px solid rgba(255,255,255,.15); color:#718096; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .p-hero { background:#131920; padding:16px 20px; border-bottom:1px solid rgba(255,255,255,.06); }
+  .p-hrow { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .p-risk { display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:800; font-family:Consolas,monospace; letter-spacing:.5px; padding:6px 16px; border-radius:20px; color:#00c853; border:1.5px solid rgba(0,200,83,.45); background:rgba(0,200,83,.08); }
+  .p-risk .d { width:9px; height:9px; border-radius:50%; background:#00c853; box-shadow:0 0 10px #00c853; animation:adpulse 1.6s infinite; }
+  @keyframes adpulse { 50% { opacity:.35; } }
+  .p-hstate { font-size:13px; font-family:Consolas,monospace; color:#c7d0de; }
+  .p-chips { display:flex; gap:10px; }
+  .p-chip { flex:1; background:#0d1117; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:10px 8px; text-align:center; }
+  .p-chip .v { font-size:24px; font-weight:800; color:#fff; display:block; line-height:1.1; font-variant-numeric:tabular-nums; }
+  .p-chip .v.or { color:#ff9100; } .p-chip .v.cy { color:#00e5ff; }
+  .p-chip .l { font-size:9.5px; color:#718096; text-transform:uppercase; letter-spacing:.7px; font-family:Consolas,monospace; margin-top:4px; display:block; }
+  .p-prog { height:6px; background:rgba(255,255,255,.07); border-radius:5px; overflow:hidden; margin-top:14px; }
+  .p-prog div { height:100%; width:20%; border-radius:5px; background:linear-gradient(90deg,#7c3aed,#00e5ff); transition:width .7s; }
+  .p-plbl { display:flex; justify-content:space-between; font-size:11.5px; color:#718096; font-family:Consolas,monospace; margin-top:6px; }
+  .p-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.06); }
+  .p-stat { background:#0d1117; padding:13px 6px; text-align:center; }
+  .p-stat .v { font-size:23px; font-weight:800; color:#fff; display:block; font-variant-numeric:tabular-nums; }
+  .p-stat .v.cy{color:#00e5ff;} .p-stat .v.gr{color:#00c853;} .p-stat .v.or{color:#ff9100;} .p-stat .v.yl{color:#ffab00;} .p-stat .v.rd{color:#ff1744;} .p-stat .v.mm{color:#718096;}
+  .p-stat .l { font-size:9.5px; color:#718096; text-transform:uppercase; letter-spacing:.6px; font-family:Consolas,monospace; margin-top:4px; display:block; }
+  .p-last { padding:11px 20px; border-top:1px solid rgba(255,255,255,.06); font-size:12.5px; font-family:Consolas,monospace; color:#718096; display:flex; gap:8px; align-items:center; white-space:nowrap; overflow:hidden; }
+  .p-last span { color:#e4e8f0; }
+  .p-log { background:#04070d; padding:12px 18px; height:120px; font-size:12.5px; font-family:Consolas,monospace; overflow:hidden; }
+  .p-le { padding:3px 0; display:flex; gap:9px; line-height:1.5; opacity:0; transform:translateY(-6px); animation:lein .35s forwards; }
+  @keyframes lein { to { opacity:1; transform:none; } }
+  .p-le .t { color:#7c3aed; opacity:.7; flex-shrink:0; }
+  .p-le.ok .m { color:#00c853; } .p-le.wa .m { color:#ffab00; } .p-le .m { color:#718096; }
+  .bump { animation:bump .45s cubic-bezier(.2,1.6,.4,1); }
+  @keyframes bump { 30% { transform:scale(1.35); } }
+
+  /* ─── cartão de perfil ─── */
+  #profCard {
+    position:absolute; left:700px; top:270px; width:560px; z-index:6;
+    background:#fff; border-radius:26px; padding:38px 40px 34px; text-align:center;
+    box-shadow:0 30px 90px rgba(0,0,0,.6);
+    opacity:0; transform:translateY(30px) scale(.94);
+    transition:all .5s cubic-bezier(.2,1.3,.35,1);
+  }
+  #profCard.show { opacity:1; transform:none; }
+  .pc-av { width:132px; height:132px; border-radius:50%; margin:0 auto 4px; padding:5px; background:conic-gradient(#f9ce34,#ee2a7b,#6228d7,#f9ce34); }
+  .pc-av-in { width:100%; height:100%; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:44px; font-weight:800; color:#fff; border:4px solid #fff; }
+  .pc-name { font-size:27px; font-weight:800; color:#111; margin-top:12px; }
+  .pc-handle { font-size:17px; color:#8899a6; margin-top:3px; }
+  .pc-stats { display:flex; justify-content:center; gap:34px; margin:18px 0 22px; }
+  .pc-stat b { font-size:20px; color:#111; display:block; }
+  .pc-stat span { font-size:13.5px; color:#8899a6; }
+  .pc-btns { display:flex; gap:12px; }
+  .pc-follow { flex:1; background:#4150f7; color:#fff; font-size:17px; font-weight:700; padding:14px; border-radius:12px; }
+  .pc-msg { flex:1.4; background:#eef1f5; color:#111; font-size:17px; font-weight:700; padding:14px; border-radius:12px; position:relative; overflow:hidden; }
+  .pc-msg.press { animation:press .35s; }
+  @keyframes press { 40% { transform:scale(.93); background:#dde3ea; } }
+
+  /* ─── janela de DM ─── */
+  #dmWin {
+    position:absolute; left:1310px; top:230px; width:520px; z-index:7;
+    background:#fff; border-radius:24px; overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.65);
+    opacity:0; transform:translateX(60px) scale(.95);
+    transition:all .5s cubic-bezier(.2,1.2,.35,1);
+  }
+  #dmWin.show { opacity:1; transform:none; }
+  .dm-head { display:flex; align-items:center; gap:12px; padding:16px 20px; border-bottom:1px solid #eef1f5; }
+  .dm-head .av { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px; }
+  .dm-head b { font-size:18px; color:#111; flex:1; text-align:left; }
+  .dm-head .x { color:#8899a6; font-size:20px; }
+  .dm-body { height:300px; background:#fafbfc; padding:18px 20px; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; gap:10px; }
+  .adm-time { align-self:center; font-size:12px; color:#aab4c0; }
+  .dm-bub {
+    max-width:82%; background:#4150f7; color:#fff; font-size:16.5px; line-height:1.45;
+    padding:13px 18px; border-radius:22px 22px 6px 22px; text-align:left;
+    opacity:0; transform:translateY(14px) scale(.9); transition:all .4s cubic-bezier(.2,1.4,.4,1);
+  }
+  .dm-bub.show { opacity:1; transform:none; }
+  .dm-check { align-self:flex-end; font-size:12.5px; color:#8899a6; opacity:0; transition:opacity .3s .2s; }
+  .dm-check.show { opacity:1; }
+  .dm-input { display:flex; align-items:center; gap:12px; padding:15px 20px; border-top:1px solid #eef1f5; }
+  .dm-input .emo { font-size:22px; }
+  .dm-field { flex:1; font-size:16.5px; color:#111; text-align:left; min-height:24px; }
+  .dm-field .ph { color:#aab4c0; }
+  .dm-caret { display:inline-block; width:2px; height:19px; background:#4150f7; vertical-align:-3px; animation:caret .8s infinite; }
+  @keyframes caret { 50% { opacity:0; } }
+  .dm-send { width:40px; height:40px; border-radius:50%; background:#4150f7; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .dm-send.go { animation:sendgo .5s; }
+  @keyframes sendgo { 40% { transform:scale(1.25) rotate(-18deg); background:#00c853; } }
+
+  /* ─── cursor falso ─── */
+  #cursor { position:absolute; z-index:50; width:34px; filter:drop-shadow(0 4px 10px rgba(0,0,0,.5)); transition:all .75s cubic-bezier(.3,.9,.3,1); pointer-events:none; }
+  #cursor.click { animation:cclick .35s; }
+  @keyframes cclick { 40% { transform:scale(.7); } }
+
+  /* ─── toast ─── */
+  #toast {
+    position:absolute; right:60px; bottom:70px; z-index:20;
+    background:#0d1117; border:1.5px solid rgba(0,200,83,.5); color:#00c853;
+    font-size:19px; font-weight:700; font-family:Consolas,monospace;
+    padding:16px 26px; border-radius:14px; box-shadow:0 14px 50px rgba(0,0,0,.6), 0 0 40px rgba(0,200,83,.12);
+    opacity:0; transform:translateY(20px); transition:all .4s cubic-bezier(.2,1.3,.4,1);
+  }
+  #toast.show { opacity:1; transform:none; }
+
+  /* ─── CTA final ─── */
+  #cta {
+    position:absolute; inset:0; z-index:100; background:rgba(5,7,12,.92); backdrop-filter:blur(14px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
+    opacity:0; pointer-events:none; transition:opacity .6s;
+  }
+  #cta.show { opacity:1; pointer-events:auto; }
+  .cta-logo { display:flex; align-items:center; gap:20px; }
+  .cta-logo svg { filter:drop-shadow(0 0 30px rgba(0,229,255,.6)); }
+  .cta-name { font-size:76px; font-weight:900; color:#fff; letter-spacing:-2px; }
+  .cta-name span { color:#00e5ff; }
+  .cta-tag { font-size:30px; color:#c7d0de; font-weight:500; }
+  .cta-chips { display:flex; gap:16px; margin-top:8px; }
+  .cta-chip { font-size:19px; color:#00e5ff; border:1.5px solid rgba(0,229,255,.35); background:rgba(0,229,255,.07); padding:12px 24px; border-radius:30px; font-weight:600; }
+  .cta-btn {
+    display:inline-block; text-decoration:none; cursor:pointer;
+    margin-top:22px; font-size:28px; font-weight:800; color:#000; background:#00e5ff;
+    padding:22px 64px; border-radius:16px; letter-spacing:.5px;
+    box-shadow:0 0 60px rgba(0,229,255,.45);
+    animation:ctapulse 1.5s ease-in-out infinite;
+  }
+  @keyframes ctapulse { 50% { transform:scale(1.05); box-shadow:0 0 90px rgba(0,229,255,.7); } }
+
+  /* ─── selos ─── */
+  .tag-demo { position:absolute; left:48px; bottom:26px; font-size:14px; color:#4a5568; font-family:Consolas,monospace; z-index:20; }
+  .tag-brand { position:absolute; right:60px; top:34px; font-size:17px; color:#718096; font-family:Consolas,monospace; z-index:20; display:flex; align-items:center; gap:8px; }
+  .tag-brand b { color:#00e5ff; }
+
 </style>
 </head>
 <body>
@@ -410,6 +606,7 @@ footer{background:var(--bg);padding:48px;border-top:1px solid var(--border);disp
   <div class="nav-links">
     <a href="#pain">O Problema</a>
     <a href="#como">Como Funciona</a>
+    <a href="#demo">Demo</a>
     <a href="#templates">Templates</a>
     <a href="#pricing">Preços</a>
     <a href="#faq">FAQ</a>
@@ -613,6 +810,129 @@ footer{background:var(--bg);padding:48px;border-top:1px solid var(--border);disp
       <div class="step"><span class="step-n">03</span><div class="step-icon">✏️</div><h3>Escolha o template</h3><p>Use um dos 5 templates prontos ou escreva sua mensagem com {user} para personalizar cada envio.</p></div>
       <div class="step"><span class="step-n">04</span><div class="step-icon">🚀</div><h3>Dispara e vai viver sua vida</h3><p>O bot abre os perfis, digita e envia cada DM com delays humanos enquanto você faz outra coisa.</p></div>
     </div>
+  </div>
+</section>
+
+
+<!-- DEMO / ANÚNCIO EM AÇÃO -->
+<section id="demo">
+  <div class="container">
+    <div class="sec-label reveal">// VEJA EM AÇÃO</div>
+    <h2 class="sec-title reveal">Assista o DirectSpeed<br/>trabalhando <em style="font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">por você.</em></h2>
+    <p class="sec-sub reveal">Simulação real do fluxo completo: a extensão abre o perfil do influenciador, digita a mensagem e envia a DM — um por um, com delays humanos e travas de segurança. Você só acompanha o painel.</p>
+    <div class="ad-frame reveal" id="adFrame">
+      <span class="demo-live">AO VIVO · SIMULAÇÃO</span>
+      <button class="demo-fs" id="adFsBtn" type="button" aria-label="Ver em tela cheia">⛶ Tela cheia</button>
+<div id="adWrap"><div id="adStage">
+  <div class="ad-gridbg"></div>
+  <div class="ad-blob ad-b1"></div><div class="ad-blob ad-b2"></div><div class="ad-blob ad-b3"></div>
+
+  <div class="tag-brand">⚡ <b>DirectSpeed</b> · extensão para Chrome e Edge</div>
+  <div class="tag-demo">* demonstração acelerada — os envios reais usam delays e pausas de segurança</div>
+
+  <div id="headWrap">
+    <div id="adHead"></div>
+    <div id="adSub"></div>
+  </div>
+
+  <!-- Painel DirectSpeed -->
+  <div id="panel">
+    <div class="p-bar">
+      <div class="p-brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#00e5ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#00e5ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Direct<span>Speed</span>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="p-pill">Missão rodando</span>
+        <div class="p-dots"><div class="p-dot">—</div><div class="p-dot">✕</div></div>
+      </div>
+    </div>
+    <div class="p-hero">
+      <div class="p-hrow">
+        <span class="p-risk"><span class="d"></span>SEGURO</span>
+        <span class="p-hstate" id="pState">Aguardando próximo envio</span>
+      </div>
+      <div class="p-chips">
+        <div class="p-chip"><span class="v or" id="pToday">11</span><span class="l">Chamados hoje</span></div>
+        <div class="p-chip"><span class="v" id="pGoal">11/50</span><span class="l">Meta diária</span></div>
+        <div class="p-chip"><span class="v cy" id="pTimer">2m 35s</span><span class="l">Próximo envio</span></div>
+      </div>
+      <div class="p-prog"><div id="pCyc"></div></div>
+      <div class="p-plbl"><span id="pCycTxt">Ciclo 1 · 2/10</span><span id="pCycPct">20%</span></div>
+    </div>
+    <div class="p-stats">
+      <div class="p-stat"><span class="v cy" id="pTotal">9.500</span><span class="l">Total</span></div>
+      <div class="p-stat"><span class="v mm" id="pPend">9.489</span><span class="l">Pendentes</span></div>
+      <div class="p-stat"><span class="v or" id="pProc">11</span><span class="l">Processados</span></div>
+      <div class="p-stat"><span class="v gr" id="pSent">11</span><span class="l">Enviados</span></div>
+      <div class="p-stat"><span class="v yl">0</span><span class="l">Ignorados</span></div>
+      <div class="p-stat"><span class="v rd">0</span><span class="l">Erros</span></div>
+    </div>
+    <div class="p-last">ÚLTIMA AÇÃO: <span id="pLast">✅ @ana.moda (MSG 1) · 13:38:44</span></div>
+    <div class="p-log" id="pLog"></div>
+  </div>
+
+  <!-- Cartão de perfil -->
+  <div id="profCard">
+    <div class="pc-av"><div class="pc-av-in" id="pcAv">MD</div></div>
+    <div class="pc-name" id="pcName">Mariana Duarte</div>
+    <div class="pc-handle" id="pcHandle">@mari.confeita · Instagram</div>
+    <div class="pc-stats">
+      <div class="pc-stat"><b id="pcPosts">1.240</b><span>posts</span></div>
+      <div class="pc-stat"><b id="pcFol">48,2 mil</b><span>seguidores</span></div>
+      <div class="pc-stat"><b>891</b><span>seguindo</span></div>
+    </div>
+    <div class="pc-btns">
+      <div class="pc-follow">Seguir</div>
+      <div class="pc-msg" id="pcMsgBtn">Enviar mensagem</div>
+    </div>
+  </div>
+
+  <!-- Janela de DM -->
+  <div id="dmWin">
+    <div class="dm-head">
+      <div class="av" id="dmAv" style="background:#ff7ab6">MD</div>
+      <b id="dmName">Mariana Duarte</b>
+      <span class="x">✕</span>
+    </div>
+    <div class="dm-body">
+      <div class="adm-time" id="dmTime">13:39</div>
+      <div class="dm-bub" id="dmBub"></div>
+      <div class="dm-check" id="dmCheck">Enviada ✓</div>
+    </div>
+    <div class="dm-input">
+      <span class="emo">🙂</span>
+      <div class="dm-field" id="dmField"><span class="ph">Mensagem...</span></div>
+      <div class="dm-send" id="dmSend"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+
+  <!-- Cursor falso -->
+  <svg id="cursor" viewBox="0 0 24 24" style="left:1500px;top:920px"><path d="M4 2l16 11.5-7 .8 4 7.2-3.4 1.8-4-7.3-5 5z" fill="#fff" stroke="#111" stroke-width="1.2"/></svg>
+
+  <div id="toast">✅ DM enviada para @mari.confeita</div>
+
+  <!-- CTA -->
+  <div id="cta">
+    <div class="cta-logo">
+      <svg width="86" height="86" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="cta-name">Direct<span>Speed</span></div>
+    </div>
+    <div class="cta-tag">Prospecção no Direct do Instagram — no piloto automático</div>
+    <div class="cta-chips">
+      <div class="cta-chip">✔ Ciclos e pausas inteligentes</div>
+      <div class="cta-chip">✔ Travas de segurança</div>
+      <div class="cta-chip">✔ Dashboard e histórico</div>
+    </div>
+    <a href="#pricing" class="cta-btn">🚀 QUERO MEU ACESSO</a>
+  </div>
+</div></div>
+    </div>
+    <div class="demo-cta-row reveal">
+      <a href="#pricing" class="btn-primary">🚀 Quero isso rodando pra mim</a>
+      <a href="#templates" class="btn-secondary">Ver os templates →</a>
+    </div>
+    <p class="demo-note reveal" style="margin-top:18px;">* demonstração acelerada — os envios reais usam delays aleatórios, ciclos e pausas de segurança</p>
   </div>
 </section>
 
@@ -914,7 +1234,16 @@ footer{background:var(--bg);padding:48px;border-top:1px solid var(--border);disp
 /* ── CURSOR ── */
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=(mx-4)+'px';cur.style.top=(my-4)+'px';});
+function moveCur(x,y){mx=x;my=y;cur.style.left=(x-4)+'px';cur.style.top=(y-4)+'px';}
+document.addEventListener('mousemove',e=>moveCur(e.clientX,e.clientY));
+/* toque: a bolinha segue o dedo enquanto arrasta e some ao soltar */
+let curFade=null;
+function showCur(){clearTimeout(curFade);cur.style.opacity='1';ring.style.opacity='1';}
+function hideCur(){curFade=setTimeout(()=>{cur.style.opacity='0';ring.style.opacity='0';},500);}
+document.addEventListener('touchstart',e=>{const t=e.touches[0];rx=t.clientX;ry=t.clientY;moveCur(t.clientX,t.clientY);showCur();},{passive:true});
+document.addEventListener('touchmove',e=>{const t=e.touches[0];moveCur(t.clientX,t.clientY);showCur();},{passive:true});
+document.addEventListener('touchend',hideCur,{passive:true});
+document.addEventListener('touchcancel',hideCur,{passive:true});
 (function aR(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=(rx-16)+'px';ring.style.top=(ry-16)+'px';requestAnimationFrame(aR);})();
 document.querySelectorAll('a,button,.faq-q,.plan,.pain-card,.feat,.caso-card,.tpl-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';ring.style.width='20px';ring.style.height='20px';});
@@ -1052,6 +1381,207 @@ function doSend(){
 }
 
 setTimeout(()=>{doSend();setInterval(doSend,2200);},1200);
+</script>
+<script>
+/* ── animação do anúncio DirectSpeed (seção #demo) ── */
+(function(){
+  const $ = id => document.getElementById(id);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const stage = $('adStage'), wrap = $('adWrap');
+
+  const frame = document.getElementById('adFrame');
+  const isFs = () => (document.fullscreenElement || document.webkitFullscreenElement) === frame;
+  function fit(){
+    const w = frame.clientWidth || frame.getBoundingClientRect().width;
+    if (!w) return;
+    let s = w / 1920;
+    if (isFs()){
+      const h = frame.clientHeight || innerHeight;
+      s = Math.min(w/1920, h/1080);
+    }
+    stage.style.transform = 'scale('+s+')';
+    wrap.style.width = Math.round(1920*s)+'px'; wrap.style.height = Math.round(1080*s)+'px';
+  }
+  addEventListener('resize', fit); fit();
+  // botão de tela cheia
+  const fsBtn = document.getElementById('adFsBtn');
+  const fsSupported = frame.requestFullscreen || frame.webkitRequestFullscreen;
+  if (!fsSupported && fsBtn) fsBtn.style.display = 'none';
+  if (fsBtn) fsBtn.addEventListener('click', () => {
+    if (isFs()){
+      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    } else {
+      (frame.requestFullscreen || frame.webkitRequestFullscreen).call(frame);
+    }
+  });
+  ['fullscreenchange','webkitfullscreenchange'].forEach(ev => document.addEventListener(ev, () => {
+    if (fsBtn) fsBtn.textContent = isFs() ? '✕ Sair da tela cheia' : '⛶ Tela cheia';
+    setTimeout(fit, 60);
+  }));
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(frame);
+
+  const LEADS = [
+    { h:'@mari.confeita', n:'Mariana Duarte', ini:'MD', posts:'1.240', fol:'48,2 mil', c:'#ff7ab6' },
+    { h:'@rafa.personal',  n:'Rafael Costa',   ini:'RC', posts:'876',   fol:'112 mil',  c:'#7c3aed' },
+    { h:'@lu.decorou',     n:'Luiza Prado',    ini:'LP', posts:'2.031', fol:'86,9 mil', c:'#00b8d9' },
+  ];
+  const HEADS = [
+    ['Prospecção no Instagram <span class="cy">no piloto automático</span>', 'A extensão abre perfil por perfil e chama no Direct — sozinha.'],
+    ['Cada lead recebe a mensagem <span class="cy">um por um</span>', 'Delays aleatórios, um envio por vez, como um humano faria.'],
+    ['Ciclos, pausas e <span class="cy">travas de segurança</span>', 'Meta diária, limite por hora e pausa automática pra proteger sua conta.'],
+  ];
+  const MSG = 'Oii, tudo bem? 😊 Vi seu perfil e amei o conteúdo!';
+
+  // contadores base (resetam a cada loop, escondidos pelo CTA)
+  let base = { today:11, pend:9489, cyc:2 };
+  let cur = {};
+
+  function setHead(i){
+    const h = $('adHead'), s = $('adSub');
+    h.classList.remove('show'); s.classList.remove('show');
+    setTimeout(()=>{ h.innerHTML = HEADS[i][0]; s.textContent = HEADS[i][1]; h.classList.add('show'); s.classList.add('show'); }, 350);
+  }
+
+  function setProfile(l){
+    $('pcAv').textContent = l.ini; $('pcAv').parentElement.style.background = 'conic-gradient(#f9ce34,#ee2a7b,#6228d7,#f9ce34)';
+    $('pcAv').style.background = l.c;
+    $('pcName').textContent = l.n;
+    $('pcHandle').textContent = l.h + ' · Instagram';
+    $('pcPosts').textContent = l.posts; $('pcFol').textContent = l.fol;
+    $('dmAv').textContent = l.ini; $('dmAv').style.background = l.c;
+    $('dmName').textContent = l.n;
+    $('dmTime').textContent = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  function bump(id){ const e=$(id); e.classList.remove('bump'); void e.offsetWidth; e.classList.add('bump'); }
+
+  function counters(){
+    $('pToday').textContent = cur.today;
+    $('pGoal').textContent  = cur.today + '/50';
+    $('pPend').textContent  = cur.pend.toLocaleString('pt-BR');
+    $('pProc').textContent  = cur.today;
+    $('pSent').textContent  = cur.today;
+    const pct = Math.round(cur.cyc/10*100);
+    $('pCyc').style.width = pct+'%';
+    $('pCycTxt').textContent = 'Ciclo 1 · '+cur.cyc+'/10';
+    $('pCycPct').textContent = pct+'%';
+  }
+
+  function addLog(l){
+    const log = $('pLog');
+    const e = document.createElement('div');
+    e.className = 'p-le ok';
+    const t = new Date().toLocaleTimeString('pt-BR');
+    e.innerHTML = '<span class="t">✓ '+t+'</span><span class="m">Enviado '+l.h+' [MSG 1] · '+cur.pend.toLocaleString('pt-BR')+' pendentes</span>';
+    log.prepend(e);
+    while (log.children.length > 4) log.removeChild(log.lastChild);
+  }
+
+  function moveCursor(x,y){ const c=$('cursor'); c.style.left=x+'px'; c.style.top=y+'px'; }
+  function clickCursor(){ const c=$('cursor'); c.classList.remove('click'); void c.offsetWidth; c.classList.add('click'); }
+
+  async function typeMsg(text){
+    const f = $('dmField');
+    f.innerHTML = '';
+    const span = document.createElement('span'); f.appendChild(span);
+    const caret = document.createElement('span'); caret.className='dm-caret'; f.appendChild(caret);
+    for (let i=0;i<text.length;i++){ span.textContent += text[i]; await wait(26); }
+    await wait(200);
+    caret.remove();
+  }
+
+  async function countdown(el, from, to, dur){
+    const steps = 18, step = (from-to)/steps;
+    for (let i=0;i<=steps;i++){ el.textContent = Math.round(from - step*i)+'s'; await wait(dur/steps); }
+  }
+
+  async function doLead(l, i){
+    setHead(i);
+    setProfile(l);
+    $('pState').textContent = 'Abrindo perfil '+l.h;
+    await wait(400);
+    $('profCard').classList.add('show');
+    moveCursor(1480, 880);
+    await wait(800);
+    // cursor vai até "Enviar mensagem"
+    moveCursor(1120, 705);
+    await wait(820);
+    clickCursor();
+    $('pcMsgBtn').classList.add('press');
+    await wait(400);
+    $('pcMsgBtn').classList.remove('press');
+    // abre DM
+    $('dmWin').classList.add('show');
+    $('dmBub').classList.remove('show');
+    $('dmCheck').classList.remove('show');
+    $('pState').textContent = 'Digitando mensagem...';
+    $('pTimer').textContent = 'agora';
+    await wait(500);
+    await typeMsg(MSG);
+    // envia
+    const send = $('dmSend'); send.classList.remove('go'); void send.offsetWidth; send.classList.add('go');
+    $('dmField').innerHTML = '<span class="ph">Mensagem...</span>';
+    $('dmBub').textContent = MSG;
+    $('dmBub').classList.add('show');
+    $('dmCheck').classList.add('show');
+    // atualiza contadores
+    cur.today++; cur.pend--; cur.cyc++;
+    counters();
+    bump('pToday'); bump('pSent'); bump('pProc');
+    $('pLast').textContent = '✅ '+l.h+' (MSG 1) · '+new Date().toLocaleTimeString('pt-BR');
+    addLog(l);
+    $('pState').textContent = 'Aguardando próximo envio';
+    // toast
+    const toast = $('toast');
+    toast.textContent = '✅ DM enviada para '+l.h;
+    toast.classList.add('show');
+    await wait(1500);
+    toast.classList.remove('show');
+    // countdown acelerado
+    countdown($('pTimer'), 44, 3, 900);
+    await wait(600);
+    $('dmWin').classList.remove('show');
+    $('profCard').classList.remove('show');
+    await wait(500);
+  }
+
+  async function showCTA(){
+    $('cta').classList.add('show');
+    await wait(3600);
+    // reseta os contadores enquanto a tela está coberta
+    cur = { ...base };
+    counters();
+    $('pLog').innerHTML = '';
+    $('cta').classList.remove('show');
+    await wait(600);
+  }
+
+  async function loop(){
+    cur = { ...base };
+    counters();
+    // log inicial
+    const l0 = document.createElement('div');
+    l0.className='p-le wa';
+    l0.innerHTML = '<span class="t">⏱ '+new Date().toLocaleTimeString('pt-BR')+'</span><span class="m">Próximo envio em 44s · missão rodando</span>';
+    $('pLog').prepend(l0);
+    while (true){
+      for (let i=0;i<LEADS.length;i++){
+        await doLead(LEADS[i], i);
+      }
+      await showCTA();
+    }
+  }
+  // inicia a animação somente quando a seção entra na tela
+  let adStarted = false;
+  function startAd(){ if (adStarted) return; adStarted = true; fit(); loop(); }
+  if ('IntersectionObserver' in window){
+    const adIo = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting){ startAd(); adIo.disconnect(); } });
+    }, { threshold: .2 });
+    adIo.observe(frame);
+    setTimeout(startAd, 12000); // fallback
+  } else { startAd(); }
+})();
 </script>
 </body>
 </html>
